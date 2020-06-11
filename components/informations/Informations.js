@@ -20,7 +20,8 @@ export default class Informations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listePriere: []
+      listePriere: [],
+      priereActuelle: ''
     }
   }
 
@@ -49,8 +50,8 @@ export default class Informations extends Component {
           }
         }
 
-        const horaireFajr = moment(listePriere.find( x => x.Libelle === 'Fajr').TimestampUTC);
-        const horaireMaghib = moment(listePriere.find( x => x.Libelle === 'Maghrib').TimestampUTC);
+        const horaireFajr = moment(listePriere.find( x => x.Libelle === 'Fajr').Debut);
+        const horaireMaghib = moment(listePriere.find( x => x.Libelle === 'Maghrib').Debut);
         const horaireLimiteAsr = horaireMaghib.clone().subtract(30, 'm');
         const horaireFajrProchain = horaireFajr.clone().add(1, 'd');
         const differenceMinutes = horaireFajrProchain.diff(horaireMaghib, 'h', true);
@@ -67,22 +68,45 @@ export default class Informations extends Component {
         nouvellePriere.Libelle = "Midnight";
         nouvellePriere.Horaire = "horaire";
         nouvellePriere.Debut = horaireMidnight.format();
-        nouvellePriere.Fin = "";
+        nouvellePriere.Fin = horaireFajrProchain.format();
         listePriere.push(nouvellePriere);
 
         const nouvellePriere = new Priere();
         nouvellePriere.Libelle = "LimiteAsr";
         nouvellePriere.Horaire = horaireLimiteAsr.hours() + ':' + horaireLimiteAsr.minute();
         nouvellePriere.Debut = horaireLimiteAsr.format();
-        nouvellePriere.Fin = "";
+        nouvellePriere.Fin = horaireMaghib.format();
         listePriere.push(nouvellePriere);
 
-        listePriere.sort((a, b) => moment(a.TimestampUTC) - moment(b.TimestampUTC))
+        listePriere.sort((a, b) => moment(a.Debut) - moment(b.Debut))
 
-        const priereActuelle = listePriere.find( x => moment(x.TimestampUTC) < moment())
+        const fajr = listePriere.find( x => x.Libelle === 'Fajr');
+        const sunrise = listePriere.find( x => x.Libelle === 'Sunrise');
+        const dhuhr = listePriere.find( x => x.Libelle === 'Dhuhr');
+        const asr = listePriere.find( x => x.Libelle === 'Asr');
+        const limiteAsr = listePriere.find( x => x.Libelle === 'LimiteAsr');
+        const maghrib = listePriere.find( x => x.Libelle === 'Maghrib');
+        const isha = listePriere.find( x => x.Libelle === 'Isha');
+        const midnight = listePriere.find( x => x.Libelle === 'Midnight');
 
-        this.setState({ listePriere });
+        fajr.Fin = sunrise.Debut;
+        sunrise.Fin = dhuhr.Debut;
+        dhuhr.Fin = asr.Debut;
+        asr.Fin = limiteAsr.Debut;
+        maghrib.Fin = isha.Debut;
+        isha.Fin = midnight.Debut;
+
+        this.setState({
+          listePriere: listePriere
+        });
         console.log(this.state.listePriere);
+
+        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
+        this.setState({
+          priereActuelle: priereActuelle
+        });
+
+        console.log(this.state.priereActuelle);
 
 
       })
