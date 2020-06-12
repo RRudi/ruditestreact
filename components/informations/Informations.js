@@ -4,12 +4,15 @@ import moment from 'moment';
 import TempsRestant from './TempsRestant';
 import TempsPriere from './TempsPriere';
 import HeureProchainePriere from './HeureProchainePriere';
+import Pourcentage from './Pourcentage';
 
 class Priere {
+  Classement;
   Libelle;
   Horaire;
   Debut;
   Fin;
+  FinVirtuelle;
 }
 
 export default class Informations extends Component {
@@ -37,10 +40,10 @@ export default class Informations extends Component {
           future: "dans %s",
           s  : 'dans quelques secondes',
           ss : '%d secondes',
-          m:  "a minute",
+          m:  "une minute",
           mm: "%d minutes",
           h:  "une heure",
-          hh: "%d heurs"
+          hh: "%d heures"
       }
     });
 
@@ -49,6 +52,7 @@ export default class Informations extends Component {
         const horaires = reponse.data.data.timings;
         const listePriere = [];
 
+        // Récupérer les horaires de prières depuis API
         for (let element in horaires) 
         {
           if(!this.listePriereBloquee.includes(`${element}`))
@@ -66,6 +70,7 @@ export default class Informations extends Component {
           }
         }
 
+        // Cacluls pour ajout des 3 limites virtuelles
         const horaireFajr = moment(listePriere.find( x => x.Libelle === 'Fajr').Debut);
         const horaireMaghib = moment(listePriere.find( x => x.Libelle === 'Maghrib').Debut);
         const horaireLimiteAsr = horaireMaghib.clone().subtract(30, 'm');
@@ -94,6 +99,7 @@ export default class Informations extends Component {
         nouvellePriere.Fin = horaireMaghib.format();
         listePriere.push(nouvellePriere);
 
+        // Mise en place des heures de Fin pour chaque prière
         listePriere.sort((a, b) => moment(a.Debut) - moment(b.Debut))
 
         const fajr = listePriere.find( x => x.Libelle === 'Fajr');
@@ -112,20 +118,19 @@ export default class Informations extends Component {
         maghrib.Fin = isha.Debut;
         isha.Fin = midnight.Debut;
 
+        // Selection de la priere en cours
         const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
 
+        // Calcul du temps restant et du pourcentage
         const heureDebut = moment(priereActuelle.Debut);
         const heureFin = moment(priereActuelle.Fin);
         const tempsRestant = heureFin.diff(moment(), 'm', true);
         const periodeComplete = heureFin.diff(heureDebut, 'm', true);
-        const pourcentage = tempsRestant/periodeComplete*100;
+        const pourcentageRestant = tempsRestant/periodeComplete*100;
+        const pourcentage = 100-pourcentageRestant;
         const fromNow = heureFin.fromNow(true);
 
-        console.log('-- TempsRestant : ', tempsRestant);
-        console.log('-- PeriodeComplete : ', periodeComplete);
-        console.log('-- Pourcentage : ', pourcentage + ' %');
-        console.log(fromNow);
-
+        // Mise à jour du State
         this.setState({
           listePriere,
           priereActuelle,

@@ -4,7 +4,7 @@ export default (props) => {
 
    return (
     <div class="alert alert-info" role="alert">
-        La prochaine prière est { props.fromNow }
+        La fin est dans { props.fromNow }
     </div>
    )
 }
