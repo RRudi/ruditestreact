@@ -13,7 +13,8 @@ class Priere {
 }
 
 export default class Informations extends Component {
-
+  
+  
   urlApi = "https://api.aladhan.com/timingsByAddress/10-06-2020?address=Paris,France&midnightmode=1&method=99&methodSettings=17,null,14&tune=0,1,0,0,-1,3,3,-2,0,0";
   listePriereBloquee = ["Imsak", "Sunset", "Midnight"];
 
@@ -21,12 +22,27 @@ export default class Informations extends Component {
     super(props);
     this.state = {
       listePriere: [],
-      priereActuelle: ''
+      priereActuelle: '',
+      fromNow: '',
+      pourcentage: ''
     }
   }
 
-
   componentDidMount() {
+
+    console.log('Informations componentDidMount');
+
+    moment.updateLocale('fr', {
+      relativeTime : {
+          future: "dans %s",
+          s  : 'dans quelques secondes',
+          ss : '%d secondes',
+          m:  "a minute",
+          mm: "%d minutes",
+          h:  "une heure",
+          hh: "%d heurs"
+      }
+    });
 
     axios.get(this.urlApi).then(reponse => {
 
@@ -96,19 +112,26 @@ export default class Informations extends Component {
         maghrib.Fin = isha.Debut;
         isha.Fin = midnight.Debut;
 
-        this.setState({
-          listePriere: listePriere
-        });
-        console.log(this.state.listePriere);
-
         const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
+
+        const heureDebut = moment(priereActuelle.Debut);
+        const heureFin = moment(priereActuelle.Fin);
+        const tempsRestant = heureFin.diff(moment(), 'm', true);
+        const periodeComplete = heureFin.diff(heureDebut, 'm', true);
+        const pourcentage = tempsRestant/periodeComplete*100;
+        const fromNow = heureFin.fromNow(true);
+
+        console.log('-- TempsRestant : ', tempsRestant);
+        console.log('-- PeriodeComplete : ', periodeComplete);
+        console.log('-- Pourcentage : ', pourcentage + ' %');
+        console.log(fromNow);
+
         this.setState({
-          priereActuelle: priereActuelle
+          listePriere,
+          priereActuelle,
+          pourcentage,
+          fromNow
         });
-
-        console.log(this.state.priereActuelle);
-
-
       })
   }
 
@@ -121,15 +144,19 @@ export default class Informations extends Component {
     return nouvelleDate.format();
   }
 
+  componentDidUpdate(){
+
+    console.log('Informations componentDidUpdate');
+    console.log(this.state);
+  }
+
   render() {
     return (
       <div className="p-3">
-        <TempsPriere />
-        <TempsRestant />
-        <HeureProchainePriere />
-        
-        <br />
-        { this.state.heureActuelle }
+        <TempsPriere nomPriere = { this.state.priereActuelle.Libelle } />
+        <TempsRestant fromNow = { this.state.fromNow }  />
+        <HeureProchainePriere finPriere = { this.state.priereActuelle.Fin }  />
+        <Pourcentage pourcentage = { this.state.pourcentage } />
       </div>
     )
   }

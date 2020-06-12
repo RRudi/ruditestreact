@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class HeureProchainePriere extends Component {
+export default (props) => {
 
-  render() {
-    return (
-      <div class="alert alert-warning" role="alert">
-        Prière de 'nompriere' : 'horaire'
-      </div>
-    )
-  }
+   return (
+    <div class="alert alert-warning" role="alert">
+      La prochaine prière est à  { moment(props.finPriere).format("HH:mm") }
+    </div>
+   )
 }

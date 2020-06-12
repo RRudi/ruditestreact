@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class TempsRestant extends Component {
+export default (props) => {
 
-  render() {
-    return (
-      <div class="alert alert-info" role="alert">
-        La prochaine prière est dans 'duree'
-      </div>
-    )
-  }
+   return (
+    <div class="alert alert-info" role="alert">
+        La prochaine prière est { props.fromNow }
+    </div>
+   )
 }

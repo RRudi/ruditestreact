@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class TempsPriere extends Component {
+export default (props) => {
 
-  render() {
-    return ( 
-      <div class="alert alert-success" role="alert">
-        C'est le moment de prier 'nomPriere'
-      </div>
-    )
-  }
+   return (
+    <div class="alert alert-success" role="alert">
+      C'est le moment de priere { props.nomPriere }
+    </div>
+   )
 }
+
