@@ -3,15 +3,12 @@ import React from 'react';
 export default (props) => {
 
    return (
-      <div className="progress" style={{height: 60 + 'px'}}>
+      <div className="progress" style={{height: 40 + 'px', width: 600 + 'px'}}>
         <div 
-          className="progress-bar bg-success progress-bar-striped progress-bar-animated" 
+          className={props.pourcentage < 90 ? "progress-bar bg-info progress-bar-striped progress-bar-animated" : "progress-bar bg-danger progress-bar-striped progress-bar-animated"}
           role="progressbar" 
-          style={{width: props.pourcentage + '%'}} 
-          aria-valuenow="25" 
-          aria-valuemin="0" 
-          aria-valuemax="100">
-        </div>
+          style={{width: props.pourcentage + '%'}}
+          aria-valuemax="100"></div>
       </div>
    )
 }

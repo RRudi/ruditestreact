@@ -159,9 +159,10 @@ export default class Informations extends Component {
     return (
       <div className="p-3">
         <TempsPriere nomPriere = { this.state.priereActuelle.Libelle } />
-        <TempsRestant fromNow = { this.state.fromNow }  />
-        <HeureProchainePriere finPriere = { this.state.priereActuelle.Fin }  />
+        <br /><br />
         <Pourcentage pourcentage = { this.state.pourcentage } />
+        <br />
+        <HeureProchainePriere finPriere = { this.state.priereActuelle.Fin } />
       </div>
     )
   }
