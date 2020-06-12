@@ -162,7 +162,7 @@ export default class Informations extends Component {
         <br /><br />
         <Pourcentage pourcentage = { this.state.pourcentage } />
         <br />
-        <HeureProchainePriere finPriere = { this.state.priereActuelle.Fin } />
+        <HeureProchainePriere priere = { this.state.priereActuelle } />
       </div>
     )
   }

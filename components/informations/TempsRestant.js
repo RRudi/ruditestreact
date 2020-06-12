@@ -4,7 +4,7 @@ export default (props) => {
 
    return (
     <div>
-        Il reste encore { props.fromNow }...
+        Prochaine prière à { props.fromNow }...
     </div>
    )
 }
