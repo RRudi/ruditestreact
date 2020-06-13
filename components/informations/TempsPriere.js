@@ -10,16 +10,14 @@ export default (props) => {
     <div>
       { props.priere.EstPriere && (
         <section className="ligneBagde">
-          <span className="badge badge-pill badge-info">
-            { props.priere.Classement }
-          </span>
+          <span>{ props.priere.Classement }</span>
 
-          { props.priere.EstSilencieuse ? 
+          { !props.priere.EstSilencieuse ? 
           (
-            <span className="badge badge-pill badge-warning"><BsFillVolumeMuteFill /></span>
+            <span>🔇</span>
           ) :
           (
-          <span className="badge badge-pill badge-info"><BsFillVolumeUpFill /></span>
+          <span>🔊</span>
           )}
 
         </section>
