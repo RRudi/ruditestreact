@@ -5,6 +5,11 @@
   font-size:99px;
 }
 
+.titreTropGros {
+  font-family: 'Montserrat', sans-serif;
+  font-size:62px;
+}
+
 .ligneBagde {
   display: flex;
   justify-content: space-between;

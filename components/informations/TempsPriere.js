@@ -12,7 +12,7 @@ export default (props) => {
         <section className="ligneBagde">
           <span>{ props.priere.Classement }</span>
 
-          { !props.priere.EstSilencieuse ? 
+          { props.priere.EstSilencieuse ? 
           (
             <span>🔇</span>
           ) :
@@ -23,7 +23,7 @@ export default (props) => {
         </section>
       )}
 
-      <span className="titre">
+      <span className = { props.priere.Libelle == "Maghrib" ? "titreTropGros" : "titre" }>
         { props.priere.EstPriere ? props.priere.Libelle : '' }
       </span>
 
@@ -46,11 +46,7 @@ export default (props) => {
       )}
 
       { props.priere.Libelle == 'Maghrib' && ( 
-        <div>C'est bon, tu peux casser ton jeune ElhamdouliLlah </div>
-      )}
-
-      { props.priere.Libelle == 'Maghrib' && ( 
-        <div>C'est bon, tu peux casser ton jeune ElhamdouliLlah </div>
+        <div>C'est bon, tu peux casser ton jeune ElhamdouliLlah 🍉</div>
       )}
       
       { props.priere.Libelle == 'Fajr' && ( 
