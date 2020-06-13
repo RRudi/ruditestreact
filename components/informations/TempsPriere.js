@@ -8,10 +8,11 @@ export default (props) => {
 
    return (
     <div>
-
       { props.priere.EstPriere && (
         <section className="ligneBagde">
-          <span className="badge badge-pill badge-info">{ props.priere.Classement } / 5</span>
+          <span className="badge badge-pill badge-info">
+            { props.priere.Classement }
+          </span>
 
           { props.priere.EstSilencieuse ? 
           (

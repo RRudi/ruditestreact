@@ -178,7 +178,7 @@ p {
 	/* Un message personnalisé */
 
 	body:before {
-		content: "Version mobile du site";
+		content: "En cours de développement";
 		display: block;
 		text-align: center;
 		font-style: italic;

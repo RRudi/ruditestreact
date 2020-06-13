@@ -134,7 +134,7 @@ export default class Informations extends Component {
         const midnight = listePriere.find( x => x.Libelle === 'Midnight');
 
         fajr.Fin = sunrise.Debut;
-        fajr.Classement = 1;
+        fajr.Classement = "🕋⚪⚪⚪⚪";
         fajr.EstPriere = true;
         fajr.EstSilencieuse = false;
         fajr.Rakat = 2;
@@ -150,7 +150,7 @@ export default class Informations extends Component {
         sunrise.RakatApres = 0;
 
         dhuhr.Fin = asr.Debut;
-        dhuhr.Classement = 2;
+        dhuhr.Classement = "🕋🕋⚪⚪⚪";
         dhuhr.EstPriere = true;
         dhuhr.EstSilencieuse = true;
         dhuhr.Rakat = 4;
@@ -158,7 +158,7 @@ export default class Informations extends Component {
         dhuhr.RakatApres = 2;
 
         asr.Fin = limiteAsr.Debut;
-        asr.Classement = 3;
+        asr.Classement = "🕋🕋🕋⚪⚪";
         asr.EstPriere = true;
         asr.EstSilencieuse = true;
         asr.Rakat = 4;
@@ -166,7 +166,7 @@ export default class Informations extends Component {
         asr.RakatApres = 0;
 
         maghrib.Fin = isha.Debut;
-        maghrib.Classement = 4;
+        maghrib.Classement = "🕋🕋🕋🕋⚪";
         maghrib.EstPriere = true;
         maghrib.EstSilencieuse = false;
         maghrib.Rakat = 3;
@@ -174,7 +174,7 @@ export default class Informations extends Component {
         maghrib.RakatApres = 2;
 
         isha.Fin = midnight.Debut;
-        isha.Classement = 5;
+        isha.Classement = "🕋🕋🕋🕋🕋";
         isha.EstPriere = true;
         isha.EstSilencieuse = false;
         isha.Rakat = 4;
