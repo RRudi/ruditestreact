@@ -43,7 +43,7 @@ class Pourcentage extends Component {
           style={{width: this.state.pourcentage + '%'}}
           className = { this.state.pourcentage < 90 ? 
           "progress-bar bg-info progress-bar-striped progress-bar-animated" : 
-          "progress-bar bg-danger progress-bar-striped progress-bar-animated"} >
+          "progress-bar bg-warning progress-bar-striped progress-bar-animated"} >
 
           { this.state.tempsRestant < 59 && ( 
             <div>Il te reste { this.state.tempsRestant } min</div>

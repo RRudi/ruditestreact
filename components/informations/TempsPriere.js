@@ -25,7 +25,7 @@ export default (props) => {
       )}
 
       <span className="titre">
-        { props.priere.EstPriere ? props.priere.Libelle : 'Pas de prière' }
+        { props.priere.EstPriere ? props.priere.Libelle : '' }
       </span>
 
       { props.priere.EstPriere && (
@@ -38,7 +38,7 @@ export default (props) => {
 
       <br />
 
-      { moment().weekday() == 6 && ( 
+      { moment().weekday() == 7 && ( 
         <div>Demain c'est Lundi, et si on jeûnait ?</div>
       )}
 

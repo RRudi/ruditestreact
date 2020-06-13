@@ -203,7 +203,7 @@ export default class Informations extends Component {
 
   render() {
     return (
-      <div className="p-3">
+      <div className="p-3 w-75">
         { this.state.priereActuelle == '' ? 'Chargement...' : (
           <div>
             <TempsPriere priere = { this.state.priereActuelle } />
