@@ -182,7 +182,13 @@ export default class Informations extends Component {
         isha.RakatApres = 2;
 
         // Selection de la priere en cours
-        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
+        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment().format() && moment(x.Fin) > moment().format())
+
+        // TODO Comparaison heure minuit
+        if(priereActuelle == undefined)
+        {
+          priereActuelle = listePriere[6];
+        }
 
         // Mise à jour du State
         this.setState({
