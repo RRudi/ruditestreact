@@ -186,15 +186,6 @@ export default class Informations extends Component {
         // Selection de la priere en cours
         const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
 
-        // Calcul du temps restant et du pourcentage
-        const heureDebut = moment(priereActuelle.Debut);
-        const heureFin = moment(priereActuelle.Fin);
-        const tempsRestant = heureFin.diff(moment(), 'm', true);
-        const periodeComplete = heureFin.diff(heureDebut, 'm', true);
-        const pourcentageRestant = tempsRestant/periodeComplete*100;
-        const pourcentage = 100-pourcentageRestant;
-        const fromNow = heureFin.fromNow(true);
-
         // Mise à jour du State
         this.setState({
           listePriere,
