@@ -38,8 +38,6 @@ export default class Informations extends Component {
 
   componentDidMount() {
 
-    console.log('Informations componentDidMount');
-
     moment.updateLocale('fr', {
       relativeTime : {
           future: "dans %s",
@@ -209,7 +207,7 @@ export default class Informations extends Component {
         { this.state.priereActuelle == '' ? 'Chargement...' : (
           <div>
             <TempsPriere priere = { this.state.priereActuelle } />
-            <br /><br />
+            <br />
             <Pourcentage priere = { this.state.priereActuelle } />
             <br />
             <HeureProchainePriere priere = { this.state.priereActuelle } />
