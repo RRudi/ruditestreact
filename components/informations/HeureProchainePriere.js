@@ -5,8 +5,10 @@ export default (props) => {
 
    return (
     <div>
-      { props.priere.Libelle == 'LimiteAsr' || props.priere.Libelle == 'Midnight' ? 'Prochaine prière à ' : "T'as jusqu'à " }
-      { moment(props.priere.Fin).format("HH:mm") }
+      <span className="badge badge-pill badge-info">
+        { props.priere.EstPriere ? "T'as jusqu'à " : "Prochaine prière à " }
+        { moment(props.priere.Fin).format("HH:mm") }
+      </span>
     </div>
    )
 }

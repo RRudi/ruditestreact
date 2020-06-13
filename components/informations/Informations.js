@@ -7,12 +7,17 @@ import HeureProchainePriere from './HeureProchainePriere';
 import Pourcentage from './Pourcentage';
 
 class Priere {
+  EstPriere;
   Classement;
   Libelle;
+  Rakat;
+  RakatAvant;
+  RakatApres;
   Horaire;
   Debut;
   Fin;
   FinVirtuelle;
+  EstSilencieuse;
 }
 
 export default class Informations extends Component {
@@ -79,6 +84,13 @@ export default class Informations extends Component {
         const horaireMidnight = horaireMaghib.clone().add(differenceMinutes/2, 'h');
 
         const nouvellePriere = new Priere();
+        nouvellePriere.Classement = 0;
+        nouvellePriere.EstPriere = false;
+        nouvellePriere.EstSilencieuse = false;
+        nouvellePriere.Rakat = 0;
+        nouvellePriere.RakatAvant = 0;
+        nouvellePriere.RakatApres = 0;
+        nouvellePriere.Libelle = "FajrProchain";
         nouvellePriere.Libelle = "FajrProchain";
         nouvellePriere.Horaire = horaireFajrProchain.hours() + ':' + horaireFajrProchain.minute();
         nouvellePriere.Debut = horaireFajrProchain.format();
@@ -86,6 +98,12 @@ export default class Informations extends Component {
         listePriere.push(nouvellePriere);
 
         const nouvellePriere = new Priere();
+        nouvellePriere.Classement = 0;
+        nouvellePriere.EstPriere = false;
+        nouvellePriere.EstSilencieuse = false;
+        nouvellePriere.Rakat = 0;
+        nouvellePriere.RakatAvant = 0;
+        nouvellePriere.RakatApres = 0;
         nouvellePriere.Libelle = "Midnight";
         nouvellePriere.Horaire = "horaire";
         nouvellePriere.Debut = horaireMidnight.format();
@@ -93,6 +111,12 @@ export default class Informations extends Component {
         listePriere.push(nouvellePriere);
 
         const nouvellePriere = new Priere();
+        nouvellePriere.Classement = 0;
+        nouvellePriere.EstPriere = false;
+        nouvellePriere.EstSilencieuse = false;
+        nouvellePriere.Rakat = 0;
+        nouvellePriere.RakatAvant = 0;
+        nouvellePriere.RakatApres = 0;
         nouvellePriere.Libelle = "LimiteAsr";
         nouvellePriere.Horaire = horaireLimiteAsr.hours() + ':' + horaireLimiteAsr.minute();
         nouvellePriere.Debut = horaireLimiteAsr.format();
@@ -112,11 +136,52 @@ export default class Informations extends Component {
         const midnight = listePriere.find( x => x.Libelle === 'Midnight');
 
         fajr.Fin = sunrise.Debut;
+        fajr.Classement = 1;
+        fajr.EstPriere = true;
+        fajr.EstSilencieuse = false;
+        fajr.Rakat = 2;
+        fajr.RakatAvant = 2;
+        fajr.RakatApres = 0;
+
         sunrise.Fin = dhuhr.Debut;
+        sunrise.Classement = 0;
+        sunrise.EstPriere = true;
+        sunrise.EstSilencieuse = false;
+        sunrise.Rakat = 0;
+        sunrise.RakatAvant = 0;
+        sunrise.RakatApres = 0;
+
         dhuhr.Fin = asr.Debut;
+        dhuhr.Classement = 2;
+        dhuhr.EstPriere = true;
+        dhuhr.EstSilencieuse = true;
+        dhuhr.Rakat = 4;
+        dhuhr.RakatAvant = 4;
+        dhuhr.RakatApres = 2;
+
         asr.Fin = limiteAsr.Debut;
+        asr.Classement = 3;
+        asr.EstPriere = true;
+        asr.EstSilencieuse = true;
+        asr.Rakat = 4;
+        asr.RakatAvant = 0;
+        asr.RakatApres = 0;
+
         maghrib.Fin = isha.Debut;
+        maghrib.Classement = 4;
+        maghrib.EstPriere = true;
+        maghrib.EstSilencieuse = false;
+        maghrib.Rakat = 3;
+        maghrib.RakatAvant = 0;
+        maghrib.RakatApres = 2;
+
         isha.Fin = midnight.Debut;
+        isha.Classement = 5;
+        isha.EstPriere = true;
+        isha.EstSilencieuse = false;
+        isha.Rakat = 4;
+        isha.RakatAvant = 0;
+        isha.RakatApres = 2;
 
         // Selection de la priere en cours
         const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
@@ -133,9 +198,7 @@ export default class Informations extends Component {
         // Mise à jour du State
         this.setState({
           listePriere,
-          priereActuelle,
-          pourcentage,
-          fromNow
+          priereActuelle
         });
       })
   }
@@ -149,20 +212,18 @@ export default class Informations extends Component {
     return nouvelleDate.format();
   }
 
-  componentDidUpdate(){
-
-    console.log('Informations componentDidUpdate');
-    console.log(this.state);
-  }
-
   render() {
     return (
       <div className="p-3">
-        <TempsPriere nomPriere = { this.state.priereActuelle.Libelle } />
-        <br /><br />
-        <Pourcentage pourcentage = { this.state.pourcentage } />
-        <br />
-        <HeureProchainePriere priere = { this.state.priereActuelle } />
+        { this.state.priereActuelle == '' ? 'Chargement...' : (
+          <div>
+            <TempsPriere priere = { this.state.priereActuelle } />
+            <br /><br />
+            <Pourcentage priere = { this.state.priereActuelle } />
+            <br />
+            <HeureProchainePriere priere = { this.state.priereActuelle } />
+          </div>
+        )}
       </div>
     )
   }

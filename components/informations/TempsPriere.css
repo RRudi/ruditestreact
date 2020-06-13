@@ -4,3 +4,8 @@
   font-family: 'Montserrat', sans-serif;
   font-size:99px;
 }
+
+.ligneBagde {
+  display: flex;
+  justify-content: space-between;
+}
