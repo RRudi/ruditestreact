@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { BsFillVolumeMuteFill } from "react-icons/bs";
-import { BsFillVolumeUpFill } from "react-icons/bs";
+import { FaVolumeMute } from "react-icons/fa";
+import { FaVolumeUp } from "react-icons/fa";
 import './TempsPriere.css';
 
 export default (props) => {
@@ -12,13 +12,7 @@ export default (props) => {
         <section className="ligneBagde">
           <span>{ props.priere.Classement }</span>
 
-          { props.priere.EstSilencieuse ? 
-          (
-            <span><BsFillVolumeMuteFill /></span>
-          ) :
-          (
-          <span><BsFillVolumeUpFill /></span>
-          )}
+          { props.priere.EstSilencieuse ? <FaVolumeMute /> : <FaVolumeUp /> }
 
         </section>
       )}

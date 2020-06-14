@@ -6,7 +6,7 @@ const HorairePriere = (props) => {
     <div>
     { props.priere.EstPriere && ( 
       
-      <li className="list-group-item list-group-item-action d-flex flex-row justify-content-between align-items-center">
+      <li className="m-1 list-group-item list-group-item-action d-flex flex-row justify-content-between align-items-center">
         <span>{ props.priere.Libelle }</span>
         <button type="button" class="btn btn-info">{ props.priere.Horaire }</button>
       </li>
@@ -29,10 +29,7 @@ export default class ListePrieres extends Component {
 
   render() {
     return (
-    <div className="container d-flex flex-column justify-content-center align-items-center align-items-center">
-      <h3 className="mb-5">Liste des prières : </h3>
-
-      <ul className="list-group w-100">
+    <div className="container d-flex flex-column justify-content-center align-items-center align-items-center">      <ul className="list-group w-100">
         { this.props.listePriere.map( p => ( <HorairePriere priere = { p } /> ))}
       </ul>
 

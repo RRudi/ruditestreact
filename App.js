@@ -6,6 +6,9 @@ import ListePrieres from './components/listePrieres/ListePrieres';
 import Header from './components/Header';
 import BarreProgressionJeune from './components/BarreProgressionJeune';
 import './App.css';
+import { FaClock } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
+import { FaPray } from "react-icons/fa";
 
 class Priere {
   EstPriere;
@@ -25,15 +28,14 @@ class App extends Component {
   
   urlApi = "https://api.aladhan.com/timingsByAddress/10-06-2020?address=Paris,France&midnightmode=1&method=99&methodSettings=17,null,14&tune=0,1,0,0,-1,3,3,-2,0,0";
   listePriereBloquee = ["Imsak", "Sunset", "Midnight"];
-  afficherListePrieres = true;
 
   constructor(props) {
     console.log('App');
     super(props);
     this.state = { 
-      listePriere: []
+      listePriere: [],
+      afficherListePrieres: false
     }
-    console.log('AfficherListePrieres',this.afficherListePrieres);
   }
 
   componentDidMount() {
@@ -200,27 +202,40 @@ class App extends Component {
     return nouvelleDate.format();
   }
 
+  handleClick() {
+    this.setState(state => ({
+      afficherListePrieres: !state.afficherListePrieres
+    }));
+    console.log('afficherListePrieres', this.state.afficherListePrieres);
+  }
+
   render() {
     return (
       
       <div className="header">
 
         { this.state.listePriere.length == 0 ? 'Chargement...' : (
-        <div>
 
           <div>
-            <BarreProgressionJeune listePriere = { this.state.listePriere } />
+
+            <div>
+              <BarreProgressionJeune listePriere = { this.state.listePriere } />
+            </div>
+            
+            <div className="inner-header flex">
+              { this.state.afficherListePrieres ? 
+                <ListePrieres listePriere = { this.state.listePriere }/> :
+                <Informations listePriere = { this.state.listePriere } />
+              }
+            </div>
+
           </div>
 
-          <div className="inner-header flex">
-            { this.afficherListePrieres ? 
-              <ListePrieres listePriere = { this.state.listePriere }/> :
-              <Informations listePriere = { this.state.listePriere } />
-            }
-          </div>
-
-        </div>
         )}
+
+        <button type="button" className="btn btn-info" onClick={() => this.handleClick()}>
+          {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
+        </button>
 
         <div>
           <svg 
