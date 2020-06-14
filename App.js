@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import Informations from './components/informations/Informations';
+import ListePrieres from './components/listePrieres/ListePrieres';
 import Header from './components/Header';
 import BarreProgressionJeune from './components/BarreProgressionJeune';
 import './App.css';
@@ -24,12 +25,15 @@ class App extends Component {
   
   urlApi = "https://api.aladhan.com/timingsByAddress/10-06-2020?address=Paris,France&midnightmode=1&method=99&methodSettings=17,null,14&tune=0,1,0,0,-1,3,3,-2,0,0";
   listePriereBloquee = ["Imsak", "Sunset", "Midnight"];
+  afficherListePrieres = true;
 
   constructor(props) {
+    console.log('App');
     super(props);
     this.state = { 
       listePriere: []
     }
+    console.log('AfficherListePrieres',this.afficherListePrieres);
   }
 
   componentDidMount() {
@@ -202,14 +206,21 @@ class App extends Component {
       <div className="header">
 
         { this.state.listePriere.length == 0 ? 'Chargement...' : (
-          <BarreProgressionJeune listePriere = { this.state.listePriere } />
-        )}
-      
-        <div className="inner-header flex">
-          { this.state.listePriere.length == 0 ? 'Chargement...' : (
-            <Informations listePriere = { this.state.listePriere } />
-          )}
+        <div>
+
+          <div>
+            <BarreProgressionJeune listePriere = { this.state.listePriere } />
+          </div>
+
+          <div className="inner-header flex">
+            { this.afficherListePrieres ? 
+              <ListePrieres listePriere = { this.state.listePriere }/> :
+              <Informations listePriere = { this.state.listePriere } />
+            }
+          </div>
+
         </div>
+        )}
 
         <div>
           <svg 

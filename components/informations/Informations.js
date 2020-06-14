@@ -8,13 +8,15 @@ import Pourcentage from './Pourcentage';
 
 export default class Informations extends Component {
   
-  priereActuelle = '';
+  priereActuelle = [];
 
   constructor(props) {
+    console.log('Informations')
     super(props);
     this.state = {
       now: moment().format()
     }
+
 
     const now = moment().format();
     this.priereActuelle = this.props.listePriere.find( 

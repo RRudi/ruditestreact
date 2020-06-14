@@ -6,6 +6,7 @@ export default class BarreProgressionJeune extends Component {
   pourcentageJourneeJeune = 0;
 
   constructor(props) {
+    console.log('BarreProgressionJeune')
     super(props);
 
     // Calcul du temps restant et du pourcentage
@@ -20,11 +21,11 @@ export default class BarreProgressionJeune extends Component {
 
   render() {
     return (
-    <div className="progress" style={{height: 5 + 'px', width: 100 + '%'}}>
+    <div className="progress" style={{height: 4 + 'px', width: 100 + '%'}}>
       <div 
         role="progressbar" 
         style={{width: this.pourcentageJourneeJeune + '%'}}
-        className = "progress-bar bg-primary" >
+        className = "progress-bar bg-info" >
       </div>
     </div>
     )

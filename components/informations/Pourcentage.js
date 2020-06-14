@@ -7,6 +7,7 @@ class Pourcentage extends Component {
   tempsRestant = 0;
 
   constructor(props) {
+    console.log('Pourcentage')
     super(props);
     this.state = {
       now: moment().format(),
