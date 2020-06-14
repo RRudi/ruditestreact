@@ -3,8 +3,8 @@ import moment from 'moment';
 
 class Pourcentage extends Component {
 
-  pourcentage;
-  tempsRestant;
+  pourcentage = 0;
+  tempsRestant = 0;
 
   constructor(props) {
     super(props);
@@ -15,7 +15,6 @@ class Pourcentage extends Component {
 
   componentDidMount() {
     
-    this.calculPourcentage();
     setInterval( () => this.setState({ now: moment().format() }), 5000 );
   }
 
@@ -33,6 +32,8 @@ class Pourcentage extends Component {
 
     this.tempsRestant = heureFin.diff(moment(this.state.now), 's', true).toFixed(0);
     this.pourcentage = 100-this.tempsRestant/periodeComplete*100;
+
+    console.log(this.tempsRestant)
   }
 
   render() {
@@ -46,7 +47,7 @@ class Pourcentage extends Component {
           "progress-bar bg-info progress-bar-striped progress-bar-animated" : 
           "progress-bar bg-warning progress-bar-striped progress-bar-animated"} >
 
-          { this.tempsRestant < 59 && ( 
+          { this.tempsRestant < 59000 && ( 
             <div>⏳ Il te reste { this.tempsRestant } min</div>
           )}
 
