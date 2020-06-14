@@ -9,13 +9,21 @@ class Pourcentage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      now: moment().format()
+      now: moment().format(),
+      pourcentage: 0,
+      tempsRestant: 0
     }
   }
 
   componentDidMount() {
     
-    setInterval( () => this.setState({ now: moment().format() }), 5000 );
+    setInterval( () => {
+      this.setState({ 
+        now: moment().format(),
+        pourcentage: this.pourcentage,
+        tempsRestant: this.tempsRestant
+      });
+    }, 5000 );
   }
 
   componentDidUpdate() {
@@ -28,31 +36,27 @@ class Pourcentage extends Component {
     // Calcul du temps restant et du pourcentage
     const heureDebut = moment(this.props.priere.Debut);
     const heureFin = moment(this.props.priere.Fin);
-    const periodeComplete = heureFin.diff(heureDebut, 's', true);
+    const periodeComplete = heureFin.diff(heureDebut, 'm', true);
 
-    this.tempsRestant = heureFin.diff(moment(this.state.now), 's', true).toFixed(0);
+    this.tempsRestant = heureFin.diff(moment(this.state.now), 'm', true).toFixed(0);
     this.pourcentage = 100-this.tempsRestant/periodeComplete*100;
-
-    console.log(this.tempsRestant)
   }
 
   render() {
     return (
-      <div>{ this.state.now }
       <div className="progress" style={{height: 40 + 'px', width: 100 + '%'}}>
         <div 
           role="progressbar" 
-          style={{width: this.pourcentage + '%'}}
-          className = { this.pourcentage < 90 ? 
+          style={{width: this.state.pourcentage + '%'}}
+          className = { this.state.pourcentage < 90 ? 
           "progress-bar bg-info progress-bar-striped progress-bar-animated" : 
           "progress-bar bg-warning progress-bar-striped progress-bar-animated"} >
 
-          { this.tempsRestant < 59000 && ( 
-            <div>⏳ Il te reste { this.tempsRestant } min</div>
+          { this.state.tempsRestant < 59 && ( 
+            <div>⏳ Il te reste { this.state.tempsRestant } min</div>
           )}
 
         </div>
-      </div>
       </div>
    )
   }
