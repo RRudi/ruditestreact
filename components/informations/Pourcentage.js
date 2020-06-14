@@ -14,8 +14,6 @@ class Pourcentage extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-    console.log(this.state.now);
 
     // Calcul du temps restant et du pourcentage
     const heureDebut = moment(this.props.priere.Debut);
@@ -29,12 +27,10 @@ class Pourcentage extends Component {
       tempsRestant
     });
 
-    console.log(this.state);
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate');
-    console.log(this.state);
+    
   }
 
   render() {

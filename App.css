@@ -176,7 +176,7 @@ p {
 	}
 	
 	/* Un message personnalisé */
-
+  /*
 	body:before {
 		content: "En cours de développement";
 		display: block;
@@ -184,4 +184,5 @@ p {
 		font-style: italic;
 		color: #777;
 	}
+  */
 }
