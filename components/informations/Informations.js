@@ -38,6 +38,7 @@ export default class Informations extends Component {
 
   componentDidMount() {
 
+    moment.locale('fr');
     moment.updateLocale('fr', {
       relativeTime : {
           future: "dans %s",
@@ -182,14 +183,9 @@ export default class Informations extends Component {
         isha.RakatApres = 2;
 
         // Selection de la priere en cours
-        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
-
-        // TODO Comparaison heure minuit
-        if(priereActuelle == undefined)
-        {
-          priereActuelle = listePriere[6];
-        }
-
+        const now = moment().format();
+        const priereActuelle = listePriere.find( x => moment(x.Debut).format() < now && moment(x.Fin).format() > now)
+        
         // Mise à jour du State
         this.setState({
           listePriere,
