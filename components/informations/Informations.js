@@ -143,7 +143,7 @@ export default class Informations extends Component {
 
         sunrise.Fin = dhuhr.Debut;
         sunrise.Classement = 0;
-        sunrise.EstPriere = true;
+        sunrise.EstPriere = false;
         sunrise.EstSilencieuse = false;
         sunrise.Rakat = 0;
         sunrise.RakatAvant = 0;
@@ -182,7 +182,7 @@ export default class Informations extends Component {
         isha.RakatApres = 2;
 
         // Selection de la priere en cours
-        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment().format() && moment(x.Fin) > moment().format())
+        const priereActuelle = listePriere.find( x => moment(x.Debut) < moment() && moment(x.Fin) > moment())
 
         // TODO Comparaison heure minuit
         if(priereActuelle == undefined)
