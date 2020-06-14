@@ -13,6 +13,7 @@ class Pourcentage extends Component {
       pourcentage: 0,
       tempsRestant: 0
     }
+    this.calculPourcentage();
   }
 
   componentDidMount() {
@@ -23,7 +24,7 @@ class Pourcentage extends Component {
         pourcentage: this.pourcentage,
         tempsRestant: this.tempsRestant
       });
-    }, 5000 );
+    }, 1000 );
   }
 
   componentDidUpdate() {
@@ -52,7 +53,7 @@ class Pourcentage extends Component {
           "progress-bar bg-info progress-bar-striped progress-bar-animated" : 
           "progress-bar bg-warning progress-bar-striped progress-bar-animated"} >
 
-          { this.state.tempsRestant < 59 && ( 
+          { this.state.tempsRestant != 0 && this.state.tempsRestant < 59 && ( 
             <div>⏳ Il te reste { this.state.tempsRestant } min</div>
           )}
 
