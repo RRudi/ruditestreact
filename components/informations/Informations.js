@@ -16,8 +16,8 @@ export default class Informations extends Component {
       now: new Date().getSeconds()
     }
 
-    console.log('constructor');
-    console.log('now', this.state.now);
+    //console.log('constructor');
+    //console.log('now', this.state.now);
 
     // Selection de la priere en cours
     const now = moment().format();
@@ -27,17 +27,17 @@ export default class Informations extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-    console.log('now', this.state.now);
+    //console.log('componentDidMount');
+    //console.log('now', this.state.now);
 
     // Mise à jour avec setState
     //setTimeout(() => this.setState({ now: new Date().getSeconds() }), 3000);
-    //setInterval( () => this.setState({ now: new Date().getSeconds() }), 1000 );
+    setInterval( () => this.setState({ now: new Date().getSeconds() }), 1000 );
   }
   
   componentDidUpdate() {
-    console.log('componentDidUpdate');
-    console.log('now', this.state.now);
+    //console.log('componentDidUpdate');
+    //console.log('now', this.state.now);
   }
 
   render() {
@@ -50,7 +50,9 @@ export default class Informations extends Component {
             <Pourcentage priere = { this.priereActuelle } />
             <br />
             <HeureProchainePriere priere = { this.priereActuelle } />
+            Secondes : {this.state.now}
           </div>
+          
         )}
       </div>
     )
