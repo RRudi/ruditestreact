@@ -55,7 +55,7 @@ class Pourcentage extends Component {
           "progress-bar bg-warning progress-bar-striped progress-bar-animated"} >
 
           { this.state.tempsRestant != 0 && this.state.tempsRestant < 59 && ( 
-            <div>⏳ Il te reste { this.state.tempsRestant } min</div>
+            <div>Il te reste { this.state.tempsRestant } min</div>
           )}
 
         </div>

@@ -6,12 +6,12 @@ import TempsPriere from './TempsPriere';
 import HeureProchainePriere from './HeureProchainePriere';
 import Pourcentage from './Pourcentage';
 
-export default class Informations extends Component {
+export default class DashBoard extends Component {
   
   priereActuelle = [];
 
   constructor(props) {
-    console.log('Informations')
+    console.log('DashBoard')
     super(props);
     this.state = {
       now: moment().format()

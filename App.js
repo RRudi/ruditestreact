@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import Informations from './components/informations/Informations';
+import DashBoard from './components/dashBoard/DashBoard';
 import ListePrieres from './components/listePrieres/ListePrieres';
 import Header from './components/Header';
 import BarreProgressionJeune from './components/BarreProgressionJeune';
@@ -15,6 +15,7 @@ import { FaCog } from "react-icons/fa";
 
 class Priere {
   EstPriere;
+  Ordre;
   Classement;
   Libelle;
   Rakat;
@@ -89,6 +90,8 @@ class App extends Component {
 
         const nouvellePriere = new Priere();
         nouvellePriere.Classement = 0;
+        nouvellePriere.Ordre = 0;
+        nouvellePriere.EstAfficherDansListe = false;
         nouvellePriere.EstPriere = false;
         nouvellePriere.EstSilencieuse = false;
         nouvellePriere.Rakat = 0;
@@ -103,6 +106,8 @@ class App extends Component {
 
         const nouvellePriere = new Priere();
         nouvellePriere.Classement = 0;
+        nouvellePriere.Ordre = 0;
+        nouvellePriere.EstAfficherDansListe = false;
         nouvellePriere.EstPriere = false;
         nouvellePriere.EstSilencieuse = false;
         nouvellePriere.Rakat = 0;
@@ -116,6 +121,8 @@ class App extends Component {
 
         const nouvellePriere = new Priere();
         nouvellePriere.Classement = 0;
+        nouvellePriere.Ordre = 0;
+        nouvellePriere.EstAfficherDansListe = false;
         nouvellePriere.EstPriere = false;
         nouvellePriere.EstSilencieuse = false;
         nouvellePriere.Rakat = 0;
@@ -141,14 +148,19 @@ class App extends Component {
 
         fajr.Fin = sunrise.Debut;
         fajr.Classement = "🕋";
+        fajr.Ordre = 1;
+        fajr.EstAfficherDansListe = true;
         fajr.EstPriere = true;
         fajr.EstSilencieuse = false;
         fajr.Rakat = 2;
         fajr.RakatAvant = 2;
         fajr.RakatApres = 0;
 
+        sunrise.Libelle = "Shorouk";
         sunrise.Fin = dhuhr.Debut;
         sunrise.Classement = 0;
+        sunrise.Ordre = 0;
+        sunrise.EstAfficherDansListe = true;
         sunrise.EstPriere = false;
         sunrise.EstSilencieuse = false;
         sunrise.Rakat = 0;
@@ -158,6 +170,8 @@ class App extends Component {
         dhuhr.Libelle = "Dohr";
         dhuhr.Fin = asr.Debut;
         dhuhr.Classement = "🕋🕋";
+        dhuhr.Ordre = 2;
+        dhuhr.EstAfficherDansListe = true;
         dhuhr.EstPriere = true;
         dhuhr.EstSilencieuse = true;
         dhuhr.Rakat = 4;
@@ -166,6 +180,8 @@ class App extends Component {
 
         asr.Fin = limiteAsr.Debut;
         asr.Classement = "🕋🕋🕋";
+        asr.Ordre = 3;
+        asr.EstAfficherDansListe = true;
         asr.EstPriere = true;
         asr.EstSilencieuse = true;
         asr.Rakat = 4;
@@ -174,6 +190,8 @@ class App extends Component {
 
         maghrib.Fin = isha.Debut;
         maghrib.Classement = "🕋🕋🕋🕋";
+        maghrib.Ordre = 4;
+        maghrib.EstAfficherDansListe = true;
         maghrib.EstPriere = true;
         maghrib.EstSilencieuse = false;
         maghrib.Rakat = 3;
@@ -182,6 +200,8 @@ class App extends Component {
 
         isha.Fin = midnight.Debut;
         isha.Classement = "🕋🕋🕋🕋🕋";
+        isha.Ordre = 5;
+        isha.EstAfficherDansListe = true;
         isha.EstPriere = true;
         isha.EstSilencieuse = false;
         isha.Rakat = 4;
@@ -237,7 +257,7 @@ class App extends Component {
             <div className="inner-header flex">
               { this.state.afficherListePrieres ? 
                 <ListePrieres listePriere = { this.state.listePriere }/> :
-                <Informations listePriere = { this.state.listePriere } />
+                <DashBoard listePriere = { this.state.listePriere } />
               }
             </div>
 
