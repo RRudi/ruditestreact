@@ -9,6 +9,9 @@ import './App.css';
 import { FaClock } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaPray } from "react-icons/fa";
+import { FaToggleOff } from "react-icons/fa";
+import { FaToggleOn } from "react-icons/fa";
+import { FaCog } from "react-icons/fa";
 
 class Priere {
   EstPriere;
@@ -222,8 +225,13 @@ class App extends Component {
               <BarreProgressionJeune listePriere = { this.state.listePriere } />
             </div>
 
-            <div className=" p-4 d-flex flex-row justify-content-between align-items-center" onClick={() => this.handleClick()}>
-              {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
+            <div className=" p-4 d-flex flex-row justify-content-between align-items-center">
+              <div onClick={() => this.handleClick()}>
+                {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
+              </div>
+              <div>
+                <FaCog />
+              </div>
             </div>
 
             <div className="inner-header flex">
