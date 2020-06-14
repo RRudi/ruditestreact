@@ -23,7 +23,7 @@ export default class Informations extends Component {
   }
 
   componentDidMount() {
-    setInterval( () => this.setState({ now: moment().format() }), 1000 );
+    setInterval( () => this.setState({ now: moment().format() }), 10000 );
   }
   
   componentDidUpdate() {}
@@ -35,7 +35,7 @@ export default class Informations extends Component {
           <div>
             <TempsPriere priere = { this.priereActuelle } />
             <br />
-            <Pourcentage priere = { this.priereActuelle } now = { this.state.now } />
+            <Pourcentage priere = { this.priereActuelle } />
             <br />
             <HeureProchainePriere priere = { this.priereActuelle } />
           </div>
