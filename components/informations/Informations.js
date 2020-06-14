@@ -13,13 +13,9 @@ export default class Informations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      now: new Date().getSeconds()
+      now: moment().format()
     }
 
-    //console.log('constructor');
-    //console.log('now', this.state.now);
-
-    // Selection de la priere en cours
     const now = moment().format();
     this.priereActuelle = this.props.listePriere.find( 
       x => moment(x.Debut).format() < now 
@@ -27,18 +23,10 @@ export default class Informations extends Component {
   }
 
   componentDidMount() {
-    //console.log('componentDidMount');
-    //console.log('now', this.state.now);
-
-    // Mise à jour avec setState
-    //setTimeout(() => this.setState({ now: new Date().getSeconds() }), 3000);
-    setInterval( () => this.setState({ now: new Date().getSeconds() }), 1000 );
+    setInterval( () => this.setState({ now: moment().format() }), 1000 );
   }
   
-  componentDidUpdate() {
-    //console.log('componentDidUpdate');
-    //console.log('now', this.state.now);
-  }
+  componentDidUpdate() {}
 
   render() {
     return (
@@ -47,12 +35,10 @@ export default class Informations extends Component {
           <div>
             <TempsPriere priere = { this.priereActuelle } />
             <br />
-            <Pourcentage priere = { this.priereActuelle } />
+            <Pourcentage priere = { this.priereActuelle } now = { this.state.now } />
             <br />
             <HeureProchainePriere priere = { this.priereActuelle } />
-            Secondes : {this.state.now}
           </div>
-          
         )}
       </div>
     )

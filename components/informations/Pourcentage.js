@@ -8,13 +8,11 @@ class Pourcentage extends Component {
 
     this.state = {
       pourcentage: 0,
-      tempsRestant: 0,
-      now: moment()
+      tempsRestant: 0
     }
   }
 
   componentDidMount() {
-
     // Calcul du temps restant et du pourcentage
     const heureDebut = moment(this.props.priere.Debut);
     const heureFin = moment(this.props.priere.Fin);
@@ -22,6 +20,9 @@ class Pourcentage extends Component {
     const periodeComplete = heureFin.diff(heureDebut, 'm', true);
     const pourcentage = 100-tempsRestant/periodeComplete*100;
 
+    //console.log('now',this.props.now)
+    //console.log('tempsRestant',tempsRestant)
+    //console.log('pourcentage',pourcentage)
     this.setState({
       pourcentage,
       tempsRestant
@@ -30,11 +31,12 @@ class Pourcentage extends Component {
   }
 
   componentDidUpdate() {
-    
+    //console.log(this.props.now)
   }
 
   render() {
     return (
+      <div>{ this.props.now }
       <div className="progress" style={{height: 40 + 'px', width: 100 + '%'}}>
         <div 
           role="progressbar" 
@@ -48,6 +50,7 @@ class Pourcentage extends Component {
           )}
 
         </div>
+      </div>
       </div>
    )
   }
