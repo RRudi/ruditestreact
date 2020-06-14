@@ -14,10 +14,10 @@ export default (props) => {
 
           { props.priere.EstSilencieuse ? 
           (
-            <span>🔇</span>
+            <span><BsFillVolumeMuteFill /></span>
           ) :
           (
-          <span>🔊</span>
+          <span><BsFillVolumeUpFill /></span>
           )}
 
         </section>

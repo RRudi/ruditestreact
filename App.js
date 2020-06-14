@@ -27,7 +27,9 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { listePriere: [], priereActuelle: '' }
+    this.state = { 
+      listePriere: []
+    }
   }
 
   componentDidMount() {
@@ -144,6 +146,7 @@ class App extends Component {
         sunrise.RakatAvant = 0;
         sunrise.RakatApres = 0;
 
+        dhuhr.Libelle = "Dohr";
         dhuhr.Fin = asr.Debut;
         dhuhr.Classement = "🕋🕋";
         dhuhr.EstPriere = true;
@@ -176,14 +179,9 @@ class App extends Component {
         isha.RakatAvant = 0;
         isha.RakatApres = 2;
 
-        // Selection de la priere en cours
-        const now = moment().format();
-        const priereActuelle = listePriere.find( x => moment(x.Debut).format() < now && moment(x.Fin).format() > now)
-        
         // Mise à jour du State
         this.setState({
-          listePriere,
-          priereActuelle
+          listePriere
         });
       }
     )
@@ -198,22 +196,18 @@ class App extends Component {
     return nouvelleDate.format();
   }
 
-  componentDidUpdate() {
-    console.log('App',this.state)
-  }
-
   render() {
     return (
       
       <div className="header">
 
         { this.state.listePriere.length == 0 ? 'Chargement...' : (
-          <BarreProgressionJeune listePriere = { this.state.listePriere }/>
+          <BarreProgressionJeune listePriere = { this.state.listePriere } />
         )}
       
         <div className="inner-header flex">
           { this.state.listePriere.length == 0 ? 'Chargement...' : (
-            <Informations listePriere = { this.state.listePriere } priereActuelle = { this.state.priereActuelle }/>
+            <Informations listePriere = { this.state.listePriere } />
           )}
         </div>
 
