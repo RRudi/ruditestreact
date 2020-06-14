@@ -12,7 +12,11 @@ export default class Informations extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      now: new Date().getSeconds()
+    }
 
+    console.log('now', this.state.now);
     // Selection de la priere en cours
     const now = moment().format();
     this.priereActuelle = this.props.listePriere.find( 
@@ -24,9 +28,10 @@ export default class Informations extends Component {
     console.log('componentDidMount');
 
     // Mise à jour avec setState
-    // setTimeout(() => this.setState({nomComplet: 'Bob Dylan'}), 3000);
+    //setTimeout(() => this.miseAJourDuState(), 3000);
+    //setInterval( () => this.setState({ now: new Date().getSeconds() }), 1000 );
   }
-
+  
   componentDidUpdate() {
     console.log('4',this.state)
   }
