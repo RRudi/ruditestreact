@@ -15,10 +15,9 @@ export default class Informations extends Component {
 
     // Selection de la priere en cours
     const now = moment().format();
-    this.priereActuelle = this.props.listePriere.find( x => 
-      moment(x.Debut).format() < now && moment(x.Fin).format() > now)
-    
-    //console.log('priereActuelle',this.priereActuelle)
+    this.priereActuelle = this.props.listePriere.find( 
+      x => moment(x.Debut).format() < now 
+        && moment(x.Fin).format() > now)
   }
 
   componentDidMount() {
