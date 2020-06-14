@@ -36,8 +36,8 @@ export default (props) => {
       )}
 
       <br />
-
-      { moment().weekday() == 7 && ( 
+      
+      { moment().weekday() == 0 && ( 
         <div>Demain c'est Lundi, et si on jeûnait ?</div>
       )}
 
