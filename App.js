@@ -221,7 +221,11 @@ class App extends Component {
             <div>
               <BarreProgressionJeune listePriere = { this.state.listePriere } />
             </div>
-            
+
+            <div className=" p-4 d-flex flex-row justify-content-between align-items-center" onClick={() => this.handleClick()}>
+              {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
+            </div>
+
             <div className="inner-header flex">
               { this.state.afficherListePrieres ? 
                 <ListePrieres listePriere = { this.state.listePriere }/> :
@@ -232,11 +236,7 @@ class App extends Component {
           </div>
 
         )}
-
-        <button type="button" className="btn btn-info" onClick={() => this.handleClick()}>
-          {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
-        </button>
-
+        
         <div>
           <svg 
           className="waves" 
