@@ -242,7 +242,7 @@ class App extends Component {
 
           <div>
 
-            <Favicon url="https://www.alsacreations.com/xmedia/doc/original/touch-icon.png" />
+            <Favicon url="https://image.flaticon.com/icons/png/512/2319/2319877.png" />
             <div>
               <BarreProgressionJeune listePriere = { this.state.listePriere } />
             </div>
