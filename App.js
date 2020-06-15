@@ -35,11 +35,11 @@ class App extends Component {
   listePriereBloquee = ["Imsak", "Sunset", "Midnight"];
 
   constructor(props) {
-    console.log('App');
     super(props);
     this.state = { 
       listePriere: [],
-      afficherListePrieres: false
+      afficherListePrieres: false,
+      priereRecuperees: false
     }
   }
 
@@ -60,6 +60,7 @@ class App extends Component {
 
     axios.get(this.urlApi).then(reponse => {
 
+        console.log(reponse.data)
         const horaires = reponse.data.data.timings;
         const listePriere = [];
         
@@ -211,7 +212,8 @@ class App extends Component {
 
         // Mise à jour du State
         this.setState({
-          listePriere
+          listePriere,
+          priereRecuperees: true
         });
       }
     )
@@ -226,11 +228,10 @@ class App extends Component {
     return nouvelleDate.format();
   }
 
-  handleClick() {
+  afficherLaListeDesPrieres() {
     this.setState(state => ({
       afficherListePrieres: !state.afficherListePrieres
     }));
-    console.log('afficherListePrieres', this.state.afficherListePrieres);
   }
 
   render() {
@@ -238,17 +239,15 @@ class App extends Component {
       
       <div className="header">
 
-        { this.state.listePriere.length == 0 ? 'Chargement...' : (
+        { !this.state.priereRecuperees ? 'Whitney Houston, we have a problemouse...' : (
 
           <div>
 
             <Favicon url="https://image.flaticon.com/icons/png/512/2319/2319877.png" />
-            <div>
-              <BarreProgressionJeune listePriere = { this.state.listePriere } />
-            </div>
+            <div><BarreProgressionJeune listePriere = { this.state.listePriere } /></div>
 
             <div className=" p-4 d-flex flex-row justify-content-between align-items-center">
-              <div onClick={() => this.handleClick()}>
+              <div onClick={() => this.afficherLaListeDesPrieres()}>
                 {this.state.afficherListePrieres ? <FaChevronLeft /> : <FaPray /> }
               </div>
               <div>

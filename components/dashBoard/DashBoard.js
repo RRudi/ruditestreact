@@ -8,32 +8,35 @@ import Pourcentage from './Pourcentage';
 
 export default class DashBoard extends Component {
   
-  priereActuelle = [];
+  priereActuelle = null;
 
   constructor(props) {
-    console.log('DashBoard')
     super(props);
     this.state = {
       now: moment().format()
     }
-
-
-    const now = moment().format();
-    this.priereActuelle = this.props.listePriere.find( 
-      x => moment(x.Debut).format() < now 
-        && moment(x.Fin).format() > now)
+    this.selectionnerPriere();
   }
 
   componentDidMount() {
-    setInterval( () => this.setState({ now: moment().format() }), 10000 );
+    setInterval( () => this.setState({ now: moment().format() }), 60000 );
   }
   
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    this.selectionnerPriere();
+  }
+
+  selectionnerPriere() {
+    const date = moment(this.state.now);
+    this.priereActuelle = this.props.listePriere.find( 
+      x => moment(x.Debut).format() < date.format()
+        && moment(x.Fin).format() > date.format())
+  }
 
   render() {
     return (
       <div className="p-3 w-75">
-        { this.priereActuelle == '' ? 'Chargement...' : (
+        { this.priereActuelle == null ? 'Whitney Houston, we have a problemouse...' : (
           <div>
             <TempsPriere priere = { this.priereActuelle } />
             <br />

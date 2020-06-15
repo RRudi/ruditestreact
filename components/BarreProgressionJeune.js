@@ -6,7 +6,6 @@ export default class BarreProgressionJeune extends Component {
   pourcentageJourneeJeune = 0;
 
   constructor(props) {
-    console.log('BarreProgressionJeune')
     super(props);
 
     // Calcul du temps restant et du pourcentage
