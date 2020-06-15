@@ -59,8 +59,11 @@ export default (props) => {
         <div>Demain c'est Jeudi, et si on jeûnait ?</div>
       )}
 
-      { props.priere.Libelle == 'Maghrib' && ( 
-        <div>C'est bon, tu peux casser ton jeune ElhamdouliLlah 🍉</div>
+      { props.priere.Libelle == 'Maghrib'  && ( 
+        <div>
+        🍉 C'est bon, tu peux casser ton jeune ElhamdouliLlah <br />
+        🤲 "La soif s'en est allée, les veines sont irriguées et la récompense est confirmée inchaAllah."
+        </div>
       )}
       
       { props.priere.Libelle == 'Fajr' && ( 
