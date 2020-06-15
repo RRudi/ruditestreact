@@ -60,7 +60,6 @@ class App extends Component {
 
     axios.get(this.urlApi).then(reponse => {
 
-        console.log(reponse.data)
         const horaires = reponse.data.data.timings;
         const listePriere = [];
         
