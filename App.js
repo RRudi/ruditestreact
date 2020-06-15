@@ -12,6 +12,7 @@ import { FaPray } from "react-icons/fa";
 import { FaToggleOff } from "react-icons/fa";
 import { FaToggleOn } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
+import Favicon from 'react-favicon';
 
 class Priere {
   EstPriere;
@@ -241,6 +242,7 @@ class App extends Component {
 
           <div>
 
+            <Favicon url="https://www.alsacreations.com/xmedia/doc/original/touch-icon.png" />
             <div>
               <BarreProgressionJeune listePriere = { this.state.listePriere } />
             </div>
