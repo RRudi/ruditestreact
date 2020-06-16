@@ -119,7 +119,7 @@ class App extends Component {
         nouvellePriere.Libelle = "Midnight";
         nouvellePriere.Horaire = "horaire";
         nouvellePriere.Debut = horaireMidnight.format();
-        nouvellePriere.Fin = horaireFajrProchain.format().subtract(1, 'days');
+        nouvellePriere.Fin = horaireFajrProchain.format();
         listePriere.push(nouvellePriere);
 
         const nouvellePriere = new Priere();
