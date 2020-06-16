@@ -15,30 +15,49 @@ export default class TempsPriere extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      listeHolidays: []
+    }
 
     this.dateHegire = momentHijri().format('iYYYY/iM/iD'); // 1436/2/30
     this.jourHegire = momentHijri(this.dateHegire).date(); // 23
   }
 
   componentDidMount() {
+    /*
+    const listeHolidays = [];
 
-    axios.get(this.urlAPI)
-      .then( response => {
-        const data = response.data.data;
-        console.log(data[0])
-        const test2 = [];
-        const test = data.filter(d => d.hijri.holidays.length > 0 ).map(x => ({ 
-          dateH: x.hijri.date, 
-          holiday: x.hijri.holidays, 
-          dateG: x.gregorian.date 
-        }))
+    for(let i = 0; i <= 12; i++){
 
-        console.log(test)
+      axios.get("https://api.aladhan.com/v1/gToHCalendar/" + i + "/2020")
+        .then( response => {
+          const data = response.data.data;
+          const temp = null;
+          
+          const holidaysTemp = data.filter(d => d.hijri.holidays.length > 0 ).map(x => (
+            temp = { 
+            dateH: x.hijri.date, 
+            holiday: x.hijri.holidays, 
+            dateG: x.gregorian.date 
+          }));
 
-      })
-      .catch( err => console.log(err))
-      
+          listeHolidays.push(temp)
+          
+          this.setState({
+            listeHolidays = listeHolidays
+          });
+          
+        })
+        .catch( err => console.log(err))
+
+    }
+    */
+    
+
+  }
+  
+  componentDidUpdate() {
+    //console.log(this.state.listeHolidays.filter(Boolean))
   }
 
   render() {

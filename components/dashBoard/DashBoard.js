@@ -19,7 +19,7 @@ export default class DashBoard extends Component {
   }
 
   componentDidMount() {
-    setInterval( () => this.setState({ now: moment().format() }), 60000 );
+    setInterval( () => this.setState({ now: moment().format() }), 120000 );
   }
   
   componentDidUpdate() {
@@ -28,9 +28,10 @@ export default class DashBoard extends Component {
 
   selectionnerPriere() {
     const date = moment(this.state.now);
+    const dateLocale = date.format();
     this.priereActuelle = this.props.listePriere.find( 
-      x => moment(x.Debut).format() < date.format()
-        && moment(x.Fin).format() > date.format())
+      x => moment(x.Debut).format() < dateLocale
+        && moment(x.Fin).format() > dateLocale)
   }
 
   render() {

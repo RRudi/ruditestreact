@@ -31,7 +31,7 @@ class Priere {
 
 class App extends Component {
   
-  urlApi = "https://api.aladhan.com/timingsByAddress/10-06-2020?address=Paris,France&midnightmode=1&method=99&methodSettings=17,null,14&tune=0,1,0,0,-1,3,3,-2,0,0";
+  
   listePriereBloquee = ["Imsak", "Sunset", "Midnight"];
 
   constructor(props) {
@@ -58,7 +58,9 @@ class App extends Component {
       }
     });
 
-    axios.get(this.urlApi).then(reponse => {
+    const urlApi = "https://api.aladhan.com/timingsByAddress/" + moment().format('DD-MM-YYYY') + "?address=Paris,France&midnightmode=1&method=99&methodSettings=17,null,14&tune=0,1,0,0,-1,3,3,-2,0,0";
+
+    axios.get(urlApi).then(reponse => {
 
         const horaires = reponse.data.data.timings;
         const listePriere = [];
@@ -117,7 +119,7 @@ class App extends Component {
         nouvellePriere.Libelle = "Midnight";
         nouvellePriere.Horaire = "horaire";
         nouvellePriere.Debut = horaireMidnight.format();
-        nouvellePriere.Fin = horaireFajrProchain.format();
+        nouvellePriere.Fin = horaireFajrProchain.format().subtract(1, 'days');
         listePriere.push(nouvellePriere);
 
         const nouvellePriere = new Priere();
